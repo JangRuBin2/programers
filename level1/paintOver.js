@@ -1,10 +1,15 @@
 function solution(n, m, section) {
-  let stack = 0;
-  for (let i = 1; i < n + 1; i++) {
-    if (!section.includes(i)) continue;
-    console.log(i);
-    if (section[section.length - 1] !== i) stack++;
+  let count = 1;
+  let start = section[0]; // 페인트칠 시작점
+
+  for (let i = 1; i < section.length; i++) {
+    // 페인트칠 범위가 최대 길이(m)을 벗어나는 경우에만 count 증가와 페인트 시작점 변경
+    if (section[i] - start >= m) {
+      count++;
+      start = section[i];
+    }
   }
-  return stack;
+  return count;
 }
-solution(8, 4, [2, 3, 6]);
+
+// https://school.programmers.co.kr/learn/courses/30/lessons/161989
