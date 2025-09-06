@@ -2,18 +2,13 @@ function solution(s, skip, index) {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
     .split("")
     .filter((alpha) => !skip.includes(alpha));
-  const arr = s.split("");
-  return arr
-    .map((a) => {
-      let targetIndex = alphabet.findIndex((alpha) => alpha === a);
-      if (!targetIndex === -1) return;
-      if (targetIndex + index >= alphabet.length) {
-        return alphabet[targetIndex + index - alphabet.length];
-      }
-      return alphabet[targetIndex + index];
+  return s
+    .split("")
+    .map((ch) => {
+      let targetIndex = alphabet.indexOf(ch);
+      if (targetIndex === -1) return;
+      targetIndex = (targetIndex + index) % alphabet.length;
+      return alphabet[targetIndex];
     })
     .join("");
 }
-solution("aukks", "wbqd", 5);
-
-// https://school.programmers.co.kr/learn/courses/30/lessons/155652
